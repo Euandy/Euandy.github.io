@@ -1,0 +1,589 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>《超时空守护者》游戏策划案 | Euandy-Blog</title><meta name="author" content="Euandy"><meta name="copyright" content="Euandy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、项目概况1、项目内容介绍《超时空守护者》是一款融合 Roguelike流程结构 与 策略塔防战斗机制 的单机科幻策略游戏。玩家扮演穿梭于多维宇宙的“守护者”，搭乘时空方舟探索未知空间，在不断变化的宇宙节点中建造防御塔、部署技能，并在一次次敌潮中生存下来。 游戏采用 程序化地图生成 + 资源随机分布 + 非线性推进 的 Roguelike 核心结构，使每一次游戏过程都独一无二，强调战术选择、资源">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《超时空守护者》游戏策划案">
+<meta property="og:url" content="https://euandy.github.io/2025/06/10/%E7%AD%96%E5%88%92%E6%A1%88/index.html">
+<meta property="og:site_name" content="Euandy-Blog">
+<meta property="og:description" content="一、项目概况1、项目内容介绍《超时空守护者》是一款融合 Roguelike流程结构 与 策略塔防战斗机制 的单机科幻策略游戏。玩家扮演穿梭于多维宇宙的“守护者”，搭乘时空方舟探索未知空间，在不断变化的宇宙节点中建造防御塔、部署技能，并在一次次敌潮中生存下来。 游戏采用 程序化地图生成 + 资源随机分布 + 非线性推进 的 Roguelike 核心结构，使每一次游戏过程都独一无二，强调战术选择、资源">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://euandy.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2025-06-10T13:05:19.000Z">
+<meta property="article:modified_time" content="2025-06-11T04:53:50.415Z">
+<meta property="article:author" content="Euandy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://euandy.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "《超时空守护者》游戏策划案",
+  "url": "https://euandy.github.io/2025/06/10/%E7%AD%96%E5%88%92%E6%A1%88/",
+  "image": "https://euandy.github.io/img/avatar.jpg",
+  "datePublished": "2025-06-10T13:05:19.000Z",
+  "dateModified": "2025-06-11T04:53:50.415Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Euandy",
+      "url": "https://euandy.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/icon.png"><link rel="canonical" href="https://euandy.github.io/2025/06/10/%E7%AD%96%E5%88%92%E6%A1%88/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '《超时空守护者》游戏策划案',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/modify.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background-image: url(/img/background.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/avater.jpg'" alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Euandy-Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">《超时空守护者》游戏策划案</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">《超时空守护者》游戏策划案</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-06-10T13:05:19.000Z" title="发表于 2025-06-10 21:05:19">2025-06-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-06-11T04:53:50.415Z" title="更新于 2025-06-11 12:53:50">2025-06-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-06-11 12:53:50&quot;}" hidden=""></div><h1 id="一、项目概况"><a href="#一、项目概况" class="headerlink" title="一、项目概况"></a>一、项目概况</h1><h2 id="1、项目内容介绍"><a href="#1、项目内容介绍" class="headerlink" title="1、项目内容介绍"></a>1、项目内容介绍</h2><p>《超时空守护者》是一款融合 <strong>Roguelike流程结构</strong> 与 <strong>策略塔防战斗机制</strong> 的单机科幻策略游戏。玩家扮演穿梭于多维宇宙的“守护者”，搭乘时空方舟探索未知空间，在不断变化的宇宙节点中建造防御塔、部署技能，并在一次次敌潮中生存下来。</p>
+<p>游戏采用 <strong>程序化地图生成 + 资源随机分布 + 非线性推进</strong> 的 Roguelike 核心结构，使每一次游戏过程都独一无二，强调战术选择、资源调度与临场决策。搭配深度定制化的塔防建造系统与技能搭配体系，形成“探索 + 生存 + 战术 + 构筑”的循环闭环体验。</p>
+<hr>
+<h2 id="2、项目核心逻辑玩法"><a href="#2、项目核心逻辑玩法" class="headerlink" title="2、项目核心逻辑玩法"></a>2、项目核心逻辑玩法</h2><p><strong>（1）Roguelike宇宙穿梭结构</strong></p>
+<ul>
+<li>每次游戏为一次完整的“穿梭之旅”，由程序生成的宇宙地图构成；</li>
+<li>节点类型包括：战斗节点（塔防关卡）、事件节点（叙事分支）、商店节点、精英，Boss节点；</li>
+<li>节点间存在路径选择，形成策略推进分支，路线影响资源、风险与最终战力构成。</li>
+</ul>
+<p><strong>（2）深度塔防战斗系统</strong></p>
+<ul>
+<li>玩家在进入战斗节点后需进行资源规划、塔位布局、塔型选择与技能配置；</li>
+<li>敌人按波次进攻，具备多样AI行为与抗性；</li>
+<li>塔防单位具备特异性升级系统，设计参考《流放之路》的技能构筑模块；</li>
+<li>战斗中可使用“守护者技能”，如时间暂停、异能打击、空间干扰等。</li>
+</ul>
+<p><strong>（3）成长与构筑机制</strong></p>
+<ul>
+<li>战斗中获得的遗物、技能与资源为本局限定，必须即时抉择与组合搭配；</li>
+<li>每次穿梭结束后可解锁新防御塔、技能、遗物库内容，持续扩展构筑深度；</li>
+<li>构成以构筑为核心的成长闭环机制，同时保留 Roguelike 的永久死亡挑战属性。</li>
+</ul>
+<hr>
+<h2 id="3、项目的突出点与创新亮点"><a href="#3、项目的突出点与创新亮点" class="headerlink" title="3、项目的突出点与创新亮点"></a>3、项目的突出点与创新亮点</h2><p><strong>（1）融合型玩法结构</strong><br>融合 Roguelike 地图推进 + 策略塔防战斗两种机制，创新性地打破传统线性关卡塔防的局限，提升重玩价值与游戏深度。</p>
+<p><strong>（2）多维时空主题 + 环境互动</strong><br>游戏设置在多重时空背景下，不同层级具有特殊物理环境机制（如时间流速变化、引力反转、敌人穿梭能力等），要求玩家实时调整战术策略；<br>环境影响不仅作用于敌人，也对防御塔与技能释放产生直接影响，强化沉浸式体验。</p>
+<p><strong>（3）构筑导向的深度策略性</strong><br>战斗以“遗物 + 技能 + 防御塔构筑组合”为核心；<br>遗物系统设计参考《杀戮尖塔》等构筑卡牌游戏，强调局内构建；<br>每局游戏形成差异化战斗风格，支持多流派搭建（如控速流、爆破流、技能施法流等）。</p>
+<p><strong>（4）可拓展性与模块化设计</strong><br>游戏架构基于模块化设计，便于未来更新多维宇宙场景、敌人种类、塔系科技、事件系统；<br>技术方案支持多人协同、防守竞速、挑战副本等后期玩法扩展。</p>
+<hr>
+<h1 id="二、游戏系统和机制"><a href="#二、游戏系统和机制" class="headerlink" title="二、游戏系统和机制"></a>二、游戏系统和机制</h1><h2 id="1、人物系统"><a href="#1、人物系统" class="headerlink" title="1、人物系统"></a>1、人物系统</h2><hr>
+<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="(1) 概述"></a>(1) 概述</h3><p>本策划案旨在对游戏中的“守护者”角色进行扩展，打造多个不同类型的守护者，每个守护者将具有独特的技能、天赋和成长路径。这些守护者将会对游戏的整体构筑和战斗策略产生深远影响，并在玩家的战术选择和塔防构建中发挥关键作用。</p>
+<ul>
+<li>引入多个守护者角色，每个守护者拥有独特的技能和天赋，带来不同的战术风格。</li>
+<li>守护者的选择将直接影响塔防系统的搭建、技能组合、资源调度等策略要素。</li>
+<li>每个守护者可以通过不同的成长路径进行定制和进化，进一步加深玩家的策略选择。</li>
+</ul>
+<hr>
+<h3 id="2-守护者角色分类"><a href="#2-守护者角色分类" class="headerlink" title="(2) 守护者角色分类"></a>(2) 守护者角色分类</h3><h4 id="时空守护者-泰瑞"><a href="#时空守护者-泰瑞" class="headerlink" title="时空守护者 - 泰瑞"></a><strong>时空守护者 - 泰瑞</strong></h4><ul>
+<li><strong>背景故事</strong>：泰瑞是时空方舟的指挥官，擅长操控时间与空间的力量。她能够在战斗中操控时间流速，影响敌人行动和防御塔性能。</li>
+<li><strong>技能</strong>：<ul>
+<li><strong>时间暂停</strong>：暂停时间数秒，所有敌人和环境静止，守护者可以在此期间自由调整塔防布局。</li>
+<li><strong>时空扭曲</strong>：造成一个区域内的敌人移动速度和攻击速度显著减缓。</li>
+</ul>
+</li>
+<li><strong>天赋</strong>：<ul>
+<li><strong>加速重生</strong>：每次死亡后，重生速度提升50%。</li>
+<li><strong>时空连锁</strong>：使用技能后，周围的塔会获得短暂的攻击速度加成。</li>
+</ul>
+</li>
+</ul>
+<h4 id="力量守护者-诺亚"><a href="#力量守护者-诺亚" class="headerlink" title="力量守护者 - 诺亚"></a><strong>力量守护者 - 诺亚</strong></h4><ul>
+<li><strong>背景故事</strong>：诺亚是来自一个曾经战争频繁的宇宙，凭借超凡的体力和对武器的掌控，他成为了时空方舟的主力战士。他的战斗风格偏向直接压制敌人。</li>
+<li><strong>技能</strong>：<ul>
+<li><strong>震荡冲击</strong>：释放一个强力冲击波，击退周围敌人并造成大量伤害。</li>
+<li><strong>钢铁护盾</strong>：为自己和周围防御塔增加一层强力护盾，吸收一定比例的伤害。</li>
+</ul>
+</li>
+<li><strong>天赋</strong>：<ul>
+<li><strong>霸者之力</strong>：每击杀一个敌人，增加自身与防御塔的攻击力。</li>
+<li><strong>无敌勇者</strong>：每次敌人突破防线时，诺亚会暂时获得护盾，抵挡一次致命伤害。</li>
+</ul>
+</li>
+</ul>
+<h4 id="智谋守护者-阿尔特"><a href="#智谋守护者-阿尔特" class="headerlink" title="智谋守护者 - 阿尔特"></a><strong>智谋守护者 - 阿尔特</strong></h4><ul>
+<li><strong>背景故事</strong>：阿尔特是时空方舟的战略家，擅长利用科技与智慧解决一切难题。她能够通过高效的资源管理和策略部署，将敌人一一击败。</li>
+<li><strong>技能</strong>：<ul>
+<li><strong>战略部署</strong>：瞬间增加一段时间内所有防御塔的攻击范围与攻击速度。</li>
+<li><strong>雷霆一击</strong>：召唤雷电攻击一个敌人，造成大量单体伤害，并有一定概率使其麻痹。</li>
+</ul>
+</li>
+<li><strong>天赋</strong>：<ul>
+<li><strong>先知之眼</strong>：能够提前预知敌人的下一波进攻类型，允许玩家做出调整。</li>
+<li><strong>资源精通</strong>：每次击杀敌人都会从敌人掉落资源，提升资源获取效率。</li>
+</ul>
+</li>
+</ul>
+<h4 id="异能守护者-莉莉丝"><a href="#异能守护者-莉莉丝" class="headerlink" title="异能守护者 - 莉莉丝"></a><strong>异能守护者 - 莉莉丝</strong></h4><ul>
+<li><strong>背景故事</strong>：莉莉丝是一位神秘的异能者，能够操控空间和精神力进行干扰。她擅长利用精神控制和反制敌人，战斗风格灵活多变。</li>
+<li><strong>技能</strong>：<ul>
+<li><strong>心灵震爆</strong>：用精神力爆发震荡波，击退并眩晕周围的敌人。</li>
+<li><strong>幻觉迷雾</strong>：在指定区域释放迷雾，使敌人短暂失明并降低攻击力。</li>
+</ul>
+</li>
+<li><strong>天赋</strong>：<ul>
+<li><strong>心灵链接</strong>：每使用一次技能，周围的塔防单位会暂时获得提升的防御能力。</li>
+<li><strong>精神聚焦</strong>：每隔一段时间，莉莉丝会在战场上随机生成一个能量球，提升周围单位的攻击速度。</li>
+</ul>
+</li>
+</ul>
+<h4 id="机械守护者-阿尔法"><a href="#机械守护者-阿尔法" class="headerlink" title="机械守护者 - 阿尔法"></a><strong>机械守护者 - 阿尔法</strong></h4><ul>
+<li><strong>背景故事</strong>：阿尔法是一台超智能的战斗机器人，拥有强大的计算能力与精准的战术执行能力。他的战斗风格偏向精确打击和高效资源管理。</li>
+<li><strong>技能</strong>：<ul>
+<li><strong>精准打击</strong>：锁定一个敌人，发动一次超高精准的远程攻击，造成巨量伤害。</li>
+<li><strong>机械修复</strong>：修复周围受损的防御塔，恢复一定比例的生命值。</li>
+</ul>
+</li>
+<li><strong>天赋</strong>：<ul>
+<li><strong>模块化改造</strong>：每升一级，阿尔法可以选择一种塔防单位进行模块化改造，提升该单位的性能。</li>
+<li><strong>计算过载</strong>：技能冷却时间减少，每次使用技能后，阿尔法会加速其所有塔的攻击速度。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-守护者成长与定制"><a href="#3-守护者成长与定制" class="headerlink" title="(3) 守护者成长与定制"></a>(3) 守护者成长与定制</h3><p>每个守护者的成长系统将围绕以下几个方面展开：</p>
+<h4 id="技能升级"><a href="#技能升级" class="headerlink" title="技能升级"></a><strong>技能升级</strong></h4><ul>
+<li>每个守护者的技能将有多个等级和效果，玩家可以通过战斗中获得的资源来提升技能威力和持续时间。例如，泰瑞的“时间暂停”技能可以提升暂停时间或增加技能使用次数。</li>
+</ul>
+<h4 id="天赋树"><a href="#天赋树" class="headerlink" title="天赋树"></a><strong>天赋树</strong></h4><ul>
+<li>每个守护者将拥有独特的天赋树，天赋将影响守护者的成长路径，提供不同的战斗增强效果。玩家可以根据战斗需要选择不同的天赋方向，如强化攻击、提升防御、增强资源获取等。</li>
+</ul>
+<h4 id="守护者专属装备"><a href="#守护者专属装备" class="headerlink" title="守护者专属装备"></a><strong>守护者专属装备</strong></h4><ul>
+<li>在游戏中，守护者可以通过击败敌人或商店购买获得专属装备，这些装备将提供额外的技能加成或增强守护者的基本属性（如攻击力、生命值、冷却缩减等）。</li>
+</ul>
+<hr>
+<h2 id="2、敌人系统"><a href="#2、敌人系统" class="headerlink" title="2、敌人系统"></a>2、敌人系统</h2><h3 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="(1) 概述"></a>(1) 概述</h3><p>敌人是游戏中的主要挑战元素，玩家需要通过合理布局塔防和技能来应对各种不同特性和攻击方式的敌人。本策划案将为敌人模块提供基本框架，包含敌人的种类、属性、技能及其在游戏中的作用。敌人的设计旨在增强游戏的挑战性，并丰富战斗策略。</p>
+<hr>
+<h3 id="2-敌人类型"><a href="#2-敌人类型" class="headerlink" title="(2) 敌人类型"></a>(2) 敌人类型</h3><h4 id="普通敌人-先锋战士"><a href="#普通敌人-先锋战士" class="headerlink" title="普通敌人 - 先锋战士"></a><strong>普通敌人 - 先锋战士</strong></h4><ul>
+<li><strong>描述</strong>：基础型敌人，最常见的敌人类型，攻击力较低，移动速度适中，适合大量出现。</li>
+<li><strong>属性</strong>：<ul>
+<li><strong>生命值</strong>：100</li>
+<li><strong>攻击力</strong>：10</li>
+<li><strong>速度</strong>：1.0（标准速度）</li>
+<li><strong>护甲</strong>：无</li>
+<li><strong>特性</strong>：无</li>
+</ul>
+</li>
+<li><strong>行为</strong>：沿着指定路径行进，直线攻击防御塔。没有特殊能力，主要依靠数量优势压迫玩家。</li>
+</ul>
+<h4 id="快速敌人-闪电猎手"><a href="#快速敌人-闪电猎手" class="headerlink" title="快速敌人 - 闪电猎手"></a><strong>快速敌人 - 闪电猎手</strong></h4><ul>
+<li><strong>描述</strong>：速度极快的敌人，能够快速穿过塔防阵地并攻击防御塔。</li>
+<li><strong>属性</strong>：<ul>
+<li><strong>生命值</strong>：50</li>
+<li><strong>攻击力</strong>：15</li>
+<li><strong>速度</strong>：1.8（快速）</li>
+<li><strong>护甲</strong>：无</li>
+<li><strong>特性</strong>：快速移动，穿越防御塔较少停留。</li>
+</ul>
+</li>
+<li><strong>行为</strong>：快速移动，攻击防御塔时会迅速撤退。如果未能在短时间内击败它，将对玩家造成严重压力。</li>
+</ul>
+<h4 id="重型敌人-钢铁巨兽"><a href="#重型敌人-钢铁巨兽" class="headerlink" title="重型敌人 - 钢铁巨兽"></a><strong>重型敌人 - 钢铁巨兽</strong></h4><ul>
+<li><strong>描述</strong>：巨型机械敌人，拥有极高的生命值和防御力，适合用来考验玩家防线的强度。</li>
+<li><strong>属性</strong>：<ul>
+<li><strong>生命值</strong>：500</li>
+<li><strong>攻击力</strong>：50</li>
+<li><strong>速度</strong>：0.5（慢速）</li>
+<li><strong>护甲</strong>：50</li>
+<li><strong>特性</strong>：高生命、高护甲，减免部分物理攻击伤害。</li>
+</ul>
+</li>
+<li><strong>行为</strong>：移动缓慢，但一旦接近塔防阵地，将对防御塔造成巨大的威胁。需要玩家使用高伤害的防御塔或技能来应对。</li>
+</ul>
+<h4 id="飞行敌人-空中侦察者"><a href="#飞行敌人-空中侦察者" class="headerlink" title="飞行敌人 - 空中侦察者"></a><strong>飞行敌人 - 空中侦察者</strong></h4><ul>
+<li><strong>描述</strong>：能够飞行的敌人，无法被地面防御塔攻击。要求玩家布置专门的防空塔。</li>
+<li><strong>属性</strong>：<ul>
+<li><strong>生命值</strong>：150</li>
+<li><strong>攻击力</strong>：25</li>
+<li><strong>速度</strong>：1.2（中速）</li>
+<li><strong>护甲</strong>：20</li>
+<li><strong>特性</strong>：飞行，不能被地面防御塔攻击，拥有较高的机动性。</li>
+</ul>
+</li>
+<li><strong>行为</strong>：飞行绕过地面塔防，攻击玩家的建筑或防御塔。需要通过特殊的防空塔进行有效拦截。</li>
+</ul>
+<h4 id="精英敌人-破碎领主"><a href="#精英敌人-破碎领主" class="headerlink" title="精英敌人 - 破碎领主"></a><strong>精英敌人 - 破碎领主</strong></h4><ul>
+<li><strong>描述</strong>：高阶敌人，具备多种特殊能力，通常出现在特殊关卡或精英Boss节点。其攻击性强，且拥有独特的技能，能对防御塔造成重大威胁。</li>
+<li><strong>属性</strong>：<ul>
+<li><strong>生命值</strong>：1000</li>
+<li><strong>攻击力</strong>：80</li>
+<li><strong>速度</strong>：0.8（慢速）</li>
+<li><strong>护甲</strong>：100</li>
+<li><strong>特性</strong>：<ul>
+<li><strong>重击</strong>：每隔一段时间造成一次重击，爆发高伤害。</li>
+<li><strong>召唤小兵</strong>：击中防御塔时有一定概率召唤一批普通敌人。</li>
+<li><strong>反弹</strong>：部分攻击会反弹回防御塔，造成一定的伤害。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>行为</strong>：精英敌人会带领一波敌人进攻，通常需要玩家专门的策略和技能来击败。通过其特殊技能，增加战斗复杂度。</li>
+</ul>
+<hr>
+<h3 id="3-敌人属性与技能"><a href="#3-敌人属性与技能" class="headerlink" title="(3) 敌人属性与技能"></a>(3) 敌人属性与技能</h3><h4 id="生命值（HP）"><a href="#生命值（HP）" class="headerlink" title="生命值（HP）"></a><strong>生命值（HP）</strong></h4><ul>
+<li>代表敌人能承受多少伤害。敌人死亡后，会掉落一定资源，通常通过击败敌人获得经验或货币。</li>
+</ul>
+<h4 id="攻击力（Attack-Power）"><a href="#攻击力（Attack-Power）" class="headerlink" title="攻击力（Attack Power）"></a><strong>攻击力（Attack Power）</strong></h4><ul>
+<li>敌人对防御塔或玩家造成的伤害，决定了敌人的威胁程度。对于特殊敌人，攻击力往往会有所不同，具备不同的攻击模式。</li>
+</ul>
+<h4 id="速度（Speed）"><a href="#速度（Speed）" class="headerlink" title="速度（Speed）"></a><strong>速度（Speed）</strong></h4><ul>
+<li>影响敌人的移动速度。快速敌人会让玩家的防线更加紧张，而慢速敌人则可能需要更强的防御塔来应对。</li>
+</ul>
+<h4 id="护甲（Armor）"><a href="#护甲（Armor）" class="headerlink" title="护甲（Armor）"></a><strong>护甲（Armor）</strong></h4><ul>
+<li>抵消部分伤害，只有具备穿透护甲能力的塔防单位（如爆破系塔或特定技能）才有效。护甲可以让敌人在面对物理攻击时变得更加坚韧。</li>
+</ul>
+<h4 id="特殊技能（Special-Abilities）"><a href="#特殊技能（Special-Abilities）" class="headerlink" title="特殊技能（Special Abilities）"></a><strong>特殊技能（Special Abilities）</strong></h4><ul>
+<li>一些敌人会拥有独特技能，这些技能可能会影响战斗的进程，如减少塔防攻击力、反弹伤害、穿透防御塔等。特殊技能增加了敌人的多样性和挑战性。</li>
+</ul>
+<hr>
+<h3 id="4-敌人生成与波次设计"><a href="#4-敌人生成与波次设计" class="headerlink" title="(4) 敌人生成与波次设计"></a>(4) 敌人生成与波次设计</h3><ul>
+<li><strong>程序化生成</strong>：游戏中的敌人波次将基于程序化生成，确保每次玩家进入新的战斗节点时，都会面临不同的敌人组合和挑战。敌人种类、属性和波次长度将根据玩家的当前进度和挑战难度动态调整。</li>
+<li><strong>波次设计</strong>：每个战斗节点会有多个波次的敌人，波次中的敌人数量与类型会逐渐增加。最后一波将出现一只或多只精英敌人，作为本关卡的最终挑战。</li>
+<li><strong>难度递增</strong>：随着玩家进度的推进，敌人种类和属性将逐渐增强，挑战性也将增加。例如，敌人的生命值、攻击力、护甲会随着游戏进程逐步提升，玩家需要不断调整战术和塔防布局来应对。</li>
+</ul>
+<hr>
+<h2 id="3、塔防系统"><a href="#3、塔防系统" class="headerlink" title="3、塔防系统"></a>3、塔防系统</h2><h3 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="(1) 概述"></a>(1) 概述</h3><p>塔防是《超时空守护者》游戏中的核心玩法之一，玩家通过合理选择和布置防御塔来抵御不断进攻的敌人。为了增加游戏的深度和自由度，本模块设计了一个“主技能与辅助技能模块化”的塔防系统。玩家可以在主技能的基础上自由选择并组合多个辅助技能，产生不同的效果，使得每种塔防单位的战术运用更加丰富多样。</p>
+<h5 id="UE5实现的简单模拟-https-www-bilibili-com-video-BV1T4TDzpEF6"><a href="#UE5实现的简单模拟-https-www-bilibili-com-video-BV1T4TDzpEF6" class="headerlink" title="UE5实现的简单模拟 https://www.bilibili.com/video/BV1T4TDzpEF6"></a>UE5实现的简单模拟 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1T4TDzpEF6">https://www.bilibili.com/video/BV1T4TDzpEF6</a></h5><hr>
+<h3 id="2-塔防类型"><a href="#2-塔防类型" class="headerlink" title="(2) )塔防类型"></a>(2) )塔防类型</h3><h4 id="激光塔"><a href="#激光塔" class="headerlink" title="激光塔"></a><strong>激光塔</strong></h4><ul>
+<li><p><strong>主技能</strong>：单体激光攻击，精准高伤害。</p>
+</li>
+<li><p><strong>攻击力</strong>：20</p>
+</li>
+<li><p><strong>攻击速度</strong>：1.0（每秒一次攻击）</p>
+</li>
+<li><p><strong>射程</strong>：5</p>
+</li>
+<li><p><strong>特点</strong>：适合处理单个敌人，尤其是高血量敌人。</p>
+</li>
+<li><p><strong>辅助技能</strong>：</p>
+<ul>
+<li><strong>穿透激光</strong>：激光可以穿透多个敌人并对后方敌人造成伤害。</li>
+<li><strong>火焰灼烧</strong>：激光攻击敌人后，会对其造成持续的火焰伤害。</li>
+<li><strong>光束分裂</strong>：激光击中敌人后，会分裂成两个小激光，攻击其他敌人。</li>
+</ul>
+</li>
+<li><p><strong>升级路径</strong>：</p>
+<ul>
+<li><strong>升级1</strong>：提高攻击力至30，射程增加至6。</li>
+<li><strong>升级2</strong>：激光束穿透多个敌人并对直线上的敌人造成伤害。</li>
+</ul>
+</li>
+</ul>
+<h4 id="火箭炮塔"><a href="#火箭炮塔" class="headerlink" title="火箭炮塔"></a><strong>火箭炮塔</strong></h4><ul>
+<li><p><strong>主技能</strong>：发射火箭，造成范围伤害。</p>
+</li>
+<li><p><strong>攻击力</strong>：50</p>
+</li>
+<li><p><strong>攻击速度</strong>：0.8（每秒一次攻击）</p>
+</li>
+<li><p><strong>射程</strong>：4</p>
+</li>
+<li><p><strong>特点</strong>：适合应对大量敌人，具有群体伤害能力。</p>
+</li>
+<li><p><strong>辅助技能</strong>：</p>
+<ul>
+<li><strong>冻伤爆炸</strong>：爆炸后让周围敌人减速并短时间冻结。</li>
+<li><strong>毒雾</strong>：爆炸后释放毒气，使敌人在一段时间内持续掉血。</li>
+<li><strong>破碎爆炸</strong>：爆炸时对敌人的护甲造成额外穿透效果。</li>
+</ul>
+</li>
+<li><p><strong>升级路径</strong>：</p>
+<ul>
+<li><strong>升级1</strong>：增加爆炸范围，爆炸伤害提升至70。</li>
+<li><strong>升级2</strong>：引入附加效果，如火焰持续伤害，降低敌人移动速度。</li>
+</ul>
+</li>
+</ul>
+<h4 id="冰冻塔"><a href="#冰冻塔" class="headerlink" title="冰冻塔"></a><strong>冰冻塔</strong></h4><ul>
+<li><p><strong>主技能</strong>：减速敌人并冻结敌人。</p>
+</li>
+<li><p><strong>攻击力</strong>：无（效果为减速/冻结）</p>
+</li>
+<li><p><strong>攻击速度</strong>：1.5（每秒一次射击）</p>
+</li>
+<li><p><strong>射程</strong>：5</p>
+</li>
+<li><p><strong>特点</strong>：减缓敌人的进攻节奏，适合配合其他攻击性塔使用。</p>
+</li>
+<li><p><strong>辅助技能</strong>：</p>
+<ul>
+<li><strong>冰霜暴击</strong>：每次敌人被冻结时，攻击会造成额外的暴击伤害。</li>
+<li><strong>寒霜范围</strong>：冻结效果扩大至更大范围。</li>
+<li><strong>寒冰爆发</strong>：冻结的敌人被击破后会释放冰霜冲击，对周围敌人造成伤害。</li>
+</ul>
+</li>
+<li><p><strong>升级路径</strong>：</p>
+<ul>
+<li><strong>升级1</strong>：增加减速比例至40%，射程增加至6。</li>
+<li><strong>升级2</strong>：冰冻敌人短时间内完全停止移动并减小其防御力。</li>
+</ul>
+</li>
+</ul>
+<h4 id="穿透塔"><a href="#穿透塔" class="headerlink" title="穿透塔"></a><strong>穿透塔</strong></h4><ul>
+<li><p><strong>主技能</strong>：穿透射弹，穿透敌人并攻击后方敌人。</p>
+</li>
+<li><p><strong>攻击力</strong>：60</p>
+</li>
+<li><p><strong>攻击速度</strong>：1.2（每秒一次攻击）</p>
+</li>
+<li><p><strong>射程</strong>：6</p>
+</li>
+<li><p><strong>特点</strong>：适合对抗高血量敌人和快速敌人。</p>
+</li>
+<li><p><strong>辅助技能</strong>：</p>
+<ul>
+<li><strong>高能射击</strong>：射弹击中后产生二次爆炸，伤害敌人周围的敌人。</li>
+<li><strong>连锁电击</strong>：穿透射弹击中敌人后，击中周围的敌人并造成电击伤害。</li>
+<li><strong>穿甲</strong>：射弹的穿透力增加，对敌人的护甲造成更多伤害。</li>
+</ul>
+</li>
+<li><p><strong>升级路径</strong>：</p>
+<ul>
+<li><strong>升级1</strong>：增加攻击力至80，射程增加至7。</li>
+<li><strong>升级2</strong>：穿透弹的攻击会附带穿透效果，击中敌人时产生次级爆炸，对附近敌人造成伤害。</li>
+</ul>
+</li>
+</ul>
+<h4 id="反射塔"><a href="#反射塔" class="headerlink" title="反射塔"></a><strong>反射塔</strong></h4><ul>
+<li><p><strong>主技能</strong>：反弹敌人的攻击并伤害敌人。</p>
+</li>
+<li><p><strong>攻击力</strong>：无（反弹伤害：反弹敌人攻击伤害的30%）</p>
+</li>
+<li><p><strong>攻击速度</strong>：0.5（每0.5秒检查一次敌人是否攻击）</p>
+</li>
+<li><p><strong>射程</strong>：3</p>
+</li>
+<li><p><strong>特点</strong>：通过反击敌人的攻击来减缓敌人的进攻速度。</p>
+</li>
+<li><p><strong>辅助技能</strong>：</p>
+<ul>
+<li><strong>反射伤害提升</strong>：反弹伤害提升至50%。</li>
+<li><strong>反弹击退</strong>：每次反弹都会将敌人击退，减缓其进攻速度。</li>
+<li><strong>电能反射</strong>：反弹敌人攻击时附带电击效果，对敌人造成额外伤害。</li>
+</ul>
+</li>
+<li><p><strong>升级路径</strong>：</p>
+<ul>
+<li><strong>升级1</strong>：提高反弹比例至40%，增强防御塔耐久。</li>
+<li><strong>升级2</strong>：增加反弹击退效果，击退敌人至较远位置。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-塔防系统与技能互动"><a href="#3-塔防系统与技能互动" class="headerlink" title="(3) 塔防系统与技能互动"></a>(3) 塔防系统与技能互动</h3><h4 id="塔防与守护者技能协同"><a href="#塔防与守护者技能协同" class="headerlink" title="塔防与守护者技能协同"></a><strong>塔防与守护者技能协同</strong></h4><p>每种塔的主技能和辅助技能的配合，可以通过守护者的技能进一步增强。例如：</p>
+<ul>
+<li><strong>泰瑞的“时空扭曲”技能</strong>：可配合控制塔（如冰冻塔）使用，减缓敌人速度，使其处于更加有利的位置，增加攻击的精度和伤害。</li>
+<li><strong>诺亚的“震荡冲击”技能</strong>：可以与火箭炮塔搭配，先击退敌人并造成群体伤害，再利用爆破塔进行最后的清理。</li>
+</ul>
+<h4 id="技能与塔防的配合示例"><a href="#技能与塔防的配合示例" class="headerlink" title="技能与塔防的配合示例"></a><strong>技能与塔防的配合示例</strong></h4><ul>
+<li><strong>泰瑞的“时空扭曲”</strong>：减缓敌人速度，配合冰冻塔的减速效果，可以大幅提高敌人的冻住概率。</li>
+<li><strong>诺亚的“震荡冲击”</strong>：震荡冲击后击退敌人，为爆破塔创造更多的攻击机会。</li>
+</ul>
+<h4 id="塔的升级与重置"><a href="#塔的升级与重置" class="headerlink" title="塔的升级与重置"></a><strong>塔的升级与重置</strong></h4><ul>
+<li><strong>升级</strong>：每个塔可以通过资源提升其攻击力、射程、攻击速度等。</li>
+<li><strong>重置</strong>：玩家可以根据战局需求重置塔的位置和属性，使塔防布局更加灵活。</li>
+</ul>
+<hr>
+<h3 id="4-塔防系统的深度与策略"><a href="#4-塔防系统的深度与策略" class="headerlink" title="(4) 塔防系统的深度与策略"></a>(4) 塔防系统的深度与策略</h3><h4 id="塔的多样性"><a href="#塔的多样性" class="headerlink" title="塔的多样性"></a><strong>塔的多样性</strong></h4><ul>
+<li>不同类型的塔可以搭配出丰富的战术效果，玩家需要根据敌人的类型、波次特性、以及守护者的技能，做出灵活的塔防选择。</li>
+</ul>
+<h4 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a><strong>资源管理</strong></h4><ul>
+<li>每个塔的建造与升级都需要消耗一定的资源，资源有限，玩家需要平衡防御塔的布局与资源的使用，确保每一波敌人都能被有效防守。</li>
+</ul>
+<h4 id="塔的模块化设计"><a href="#塔的模块化设计" class="headerlink" title="塔的模块化设计"></a><strong>塔的模块化设计</strong></h4><ul>
+<li><strong>塔的模块化升级</strong>：某些塔防单位可根据玩家选择的升级路线，变得更为特殊或强大。例如，爆破塔在升级后可以转变为带有火焰效果的“火焰炮塔”，增加对敌人的持续伤害。</li>
+</ul>
+<h4 id="塔的特殊效果"><a href="#塔的特殊效果" class="headerlink" title="塔的特殊效果"></a><strong>塔的特殊效果</strong></h4><ul>
+<li>某些塔具有独特的辅助效果，比如恢复友军生命、提高周围塔的攻击速度、延缓敌人移动速度等。这些效果将影响玩家的战略部署和战斗节奏。</li>
+</ul>
+<hr>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://euandy.github.io">Euandy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://euandy.github.io/2025/06/10/%E7%AD%96%E5%88%92%E6%A1%88/">https://euandy.github.io/2025/06/10/%E7%AD%96%E5%88%92%E6%A1%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://euandy.github.io" target="_blank">Euandy-Blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer=""></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/06/08/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post"  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div></a><a class="pagination-related" href="/2025/06/11/%E6%B8%B8%E6%88%8F%E6%8B%86%E8%A7%A3%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/" title="游戏拆解简单总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">游戏拆解简单总结</div></div><div class="info-2"><div class="info-item-1">简单的游戏设计理论与拆解步骤总结常见的几种设计理论包括MDA理论、GMT理论和TMV理论，每种理论都有其独特的视角和方法，帮助游戏设计师从不同层面进行分析与优化。 一、常用的游戏设计理论1....</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/avater.jpg'" alt="avatar"></div><div class="author-info-name">Euandy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Euandy/Euandy.github.io" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E6%A6%82%E5%86%B5"><span class="toc-text">一、项目概况</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E9%A1%B9%E7%9B%AE%E5%86%85%E5%AE%B9%E4%BB%8B%E7%BB%8D"><span class="toc-text">1、项目内容介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E9%A1%B9%E7%9B%AE%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91%E7%8E%A9%E6%B3%95"><span class="toc-text">2、项目核心逻辑玩法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%AA%81%E5%87%BA%E7%82%B9%E4%B8%8E%E5%88%9B%E6%96%B0%E4%BA%AE%E7%82%B9"><span class="toc-text">3、项目的突出点与创新亮点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B8%B8%E6%88%8F%E7%B3%BB%E7%BB%9F%E5%92%8C%E6%9C%BA%E5%88%B6"><span class="toc-text">二、游戏系统和机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E4%BA%BA%E7%89%A9%E7%B3%BB%E7%BB%9F"><span class="toc-text">1、人物系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-text">(1) 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%88%E6%8A%A4%E8%80%85%E8%A7%92%E8%89%B2%E5%88%86%E7%B1%BB"><span class="toc-text">(2) 守护者角色分类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E7%A9%BA%E5%AE%88%E6%8A%A4%E8%80%85-%E6%B3%B0%E7%91%9E"><span class="toc-text">时空守护者 - 泰瑞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9B%E9%87%8F%E5%AE%88%E6%8A%A4%E8%80%85-%E8%AF%BA%E4%BA%9A"><span class="toc-text">力量守护者 - 诺亚</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%BA%E8%B0%8B%E5%AE%88%E6%8A%A4%E8%80%85-%E9%98%BF%E5%B0%94%E7%89%B9"><span class="toc-text">智谋守护者 - 阿尔特</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E8%83%BD%E5%AE%88%E6%8A%A4%E8%80%85-%E8%8E%89%E8%8E%89%E4%B8%9D"><span class="toc-text">异能守护者 - 莉莉丝</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%BA%E6%A2%B0%E5%AE%88%E6%8A%A4%E8%80%85-%E9%98%BF%E5%B0%94%E6%B3%95"><span class="toc-text">机械守护者 - 阿尔法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AE%88%E6%8A%A4%E8%80%85%E6%88%90%E9%95%BF%E4%B8%8E%E5%AE%9A%E5%88%B6"><span class="toc-text">(3) 守护者成长与定制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E8%83%BD%E5%8D%87%E7%BA%A7"><span class="toc-text">技能升级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A9%E8%B5%8B%E6%A0%91"><span class="toc-text">天赋树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%88%E6%8A%A4%E8%80%85%E4%B8%93%E5%B1%9E%E8%A3%85%E5%A4%87"><span class="toc-text">守护者专属装备</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E6%95%8C%E4%BA%BA%E7%B3%BB%E7%BB%9F"><span class="toc-text">2、敌人系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0-1"><span class="toc-text">(1) 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%95%8C%E4%BA%BA%E7%B1%BB%E5%9E%8B"><span class="toc-text">(2) 敌人类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E6%95%8C%E4%BA%BA-%E5%85%88%E9%94%8B%E6%88%98%E5%A3%AB"><span class="toc-text">普通敌人 - 先锋战士</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%95%8C%E4%BA%BA-%E9%97%AA%E7%94%B5%E7%8C%8E%E6%89%8B"><span class="toc-text">快速敌人 - 闪电猎手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%9E%8B%E6%95%8C%E4%BA%BA-%E9%92%A2%E9%93%81%E5%B7%A8%E5%85%BD"><span class="toc-text">重型敌人 - 钢铁巨兽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A3%9E%E8%A1%8C%E6%95%8C%E4%BA%BA-%E7%A9%BA%E4%B8%AD%E4%BE%A6%E5%AF%9F%E8%80%85"><span class="toc-text">飞行敌人 - 空中侦察者</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B2%BE%E8%8B%B1%E6%95%8C%E4%BA%BA-%E7%A0%B4%E7%A2%8E%E9%A2%86%E4%B8%BB"><span class="toc-text">精英敌人 - 破碎领主</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%8C%E4%BA%BA%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%8A%80%E8%83%BD"><span class="toc-text">(3) 敌人属性与技能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%80%BC%EF%BC%88HP%EF%BC%89"><span class="toc-text">生命值（HP）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E5%8A%9B%EF%BC%88Attack-Power%EF%BC%89"><span class="toc-text">攻击力（Attack Power）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9F%E5%BA%A6%EF%BC%88Speed%EF%BC%89"><span class="toc-text">速度（Speed）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A4%E7%94%B2%EF%BC%88Armor%EF%BC%89"><span class="toc-text">护甲（Armor）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%8A%80%E8%83%BD%EF%BC%88Special-Abilities%EF%BC%89"><span class="toc-text">特殊技能（Special Abilities）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%95%8C%E4%BA%BA%E7%94%9F%E6%88%90%E4%B8%8E%E6%B3%A2%E6%AC%A1%E8%AE%BE%E8%AE%A1"><span class="toc-text">(4) 敌人生成与波次设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%A1%94%E9%98%B2%E7%B3%BB%E7%BB%9F"><span class="toc-text">3、塔防系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0-2"><span class="toc-text">(1) 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#UE5%E5%AE%9E%E7%8E%B0%E7%9A%84%E7%AE%80%E5%8D%95%E6%A8%A1%E6%8B%9F-https-www-bilibili-com-video-BV1T4TDzpEF6"><span class="toc-text">UE5实现的简单模拟 https://www.bilibili.com/video/BV1T4TDzpEF6</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A1%94%E9%98%B2%E7%B1%BB%E5%9E%8B"><span class="toc-text">(2) )塔防类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BF%80%E5%85%89%E5%A1%94"><span class="toc-text">激光塔</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%81%AB%E7%AE%AD%E7%82%AE%E5%A1%94"><span class="toc-text">火箭炮塔</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B0%E5%86%BB%E5%A1%94"><span class="toc-text">冰冻塔</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BF%E9%80%8F%E5%A1%94"><span class="toc-text">穿透塔</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%A1%94"><span class="toc-text">反射塔</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A1%94%E9%98%B2%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%8A%80%E8%83%BD%E4%BA%92%E5%8A%A8"><span class="toc-text">(3) 塔防系统与技能互动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A1%94%E9%98%B2%E4%B8%8E%E5%AE%88%E6%8A%A4%E8%80%85%E6%8A%80%E8%83%BD%E5%8D%8F%E5%90%8C"><span class="toc-text">塔防与守护者技能协同</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E8%83%BD%E4%B8%8E%E5%A1%94%E9%98%B2%E7%9A%84%E9%85%8D%E5%90%88%E7%A4%BA%E4%BE%8B"><span class="toc-text">技能与塔防的配合示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A1%94%E7%9A%84%E5%8D%87%E7%BA%A7%E4%B8%8E%E9%87%8D%E7%BD%AE"><span class="toc-text">塔的升级与重置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%A1%94%E9%98%B2%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%B7%B1%E5%BA%A6%E4%B8%8E%E7%AD%96%E7%95%A5"><span class="toc-text">(4) 塔防系统的深度与策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A1%94%E7%9A%84%E5%A4%9A%E6%A0%B7%E6%80%A7"><span class="toc-text">塔的多样性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="toc-text">资源管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A1%94%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AE%BE%E8%AE%A1"><span class="toc-text">塔的模块化设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A1%94%E7%9A%84%E7%89%B9%E6%AE%8A%E6%95%88%E6%9E%9C"><span class="toc-text">塔的特殊效果</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/14/%E7%9A%84%E5%8C%BA%E5%88%AB/" title="的区别">的区别</a><time datetime="2025-06-14T15:24:51.000Z" title="发表于 2025-06-14 23:24:51">2025-06-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/11/%E5%9F%BA%E4%BA%8E%E3%80%8A%E6%9C%80%E7%BB%88%E5%B9%BB%E6%83%B3%E3%80%8B%E5%92%8C%E3%80%8A%E6%9A%97%E9%BB%91%E7%A0%B4%E5%9D%8F%E7%A5%9E%E3%80%8B%E7%9A%84RPG%E6%B8%B8%E6%88%8F%E7%AE%80%E5%8D%95%E5%88%86%E6%9E%90/" title="基于《最终幻想》和《暗黑破坏神》的RPG游戏简单分析">基于《最终幻想》和《暗黑破坏神》的RPG游戏简单分析</a><time datetime="2025-06-11T04:42:56.000Z" title="发表于 2025-06-11 12:42:56">2025-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/11/%E6%B8%B8%E6%88%8F%E6%8B%86%E8%A7%A3%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/" title="游戏拆解简单总结">游戏拆解简单总结</a><time datetime="2025-06-11T04:38:01.000Z" title="发表于 2025-06-11 12:38:01">2025-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/10/%E7%AD%96%E5%88%92%E6%A1%88/" title="《超时空守护者》游戏策划案">《超时空守护者》游戏策划案</a><time datetime="2025-06-10T13:05:19.000Z" title="发表于 2025-06-10 21:05:19">2025-06-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/08/hello-world/" title="Hello World">Hello World</a><time datetime="2025-06-08T12:00:18.663Z" title="发表于 2025-06-08 20:00:18">2025-06-08</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div id="footer-wrap"><div class="copyright">©2025 By Euandy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zindex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
