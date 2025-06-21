@@ -1,0 +1,369 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>GAS在多人游戏中的使用 | Euandy-Blog</title><meta name="author" content="Euandy"><meta name="copyright" content="Euandy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="🎮 GAS系统在多人游戏中的设置差异与初始化时机一、概述**多人游戏（Networked Game）**中，由于存在服务器与多个客户端的结构，GAS 的使用必须区分不同对象在运行时的职责和行为。  二、GAS核心对象与角色差异   对象名称 功能说明    Owner Actor GAS组件的拥有者（通常为PlayerState，便于跨控制器持久化）。   Avatar Actor 能力的执行者">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GAS在多人游戏中的使用">
+<meta property="og:url" content="https://euandy.github.io/2025/06/21/GAS%E5%9C%A8%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Euandy-Blog">
+<meta property="og:description" content="🎮 GAS系统在多人游戏中的设置差异与初始化时机一、概述**多人游戏（Networked Game）**中，由于存在服务器与多个客户端的结构，GAS 的使用必须区分不同对象在运行时的职责和行为。  二、GAS核心对象与角色差异   对象名称 功能说明    Owner Actor GAS组件的拥有者（通常为PlayerState，便于跨控制器持久化）。   Avatar Actor 能力的执行者">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://euandy.github.io/img/avatar.jpg">
+<meta property="article:published_time" content="2025-06-21T12:46:10.000Z">
+<meta property="article:modified_time" content="2025-06-21T12:48:28.330Z">
+<meta property="article:author" content="Euandy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://euandy.github.io/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "GAS在多人游戏中的使用",
+  "url": "https://euandy.github.io/2025/06/21/GAS%E5%9C%A8%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/",
+  "image": "https://euandy.github.io/img/avatar.jpg",
+  "datePublished": "2025-06-21T12:46:10.000Z",
+  "dateModified": "2025-06-21T12:48:28.330Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Euandy",
+      "url": "https://euandy.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/icon.png"><link rel="canonical" href="https://euandy.github.io/2025/06/21/GAS%E5%9C%A8%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'GAS在多人游戏中的使用',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/modify.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background-image: url(/img/background.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/avater.jpg'" alt="avatar"></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Euandy-Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">GAS在多人游戏中的使用</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> Gallery</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">GAS在多人游戏中的使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-06-21T12:46:10.000Z" title="发表于 2025-06-21 20:46:10">2025-06-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-06-21T12:48:28.330Z" title="更新于 2025-06-21 20:48:28">2025-06-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-06-21 20:48:28&quot;}" hidden=""></div><h1 id="🎮-GAS系统在多人游戏中的设置差异与初始化时机"><a href="#🎮-GAS系统在多人游戏中的设置差异与初始化时机" class="headerlink" title="🎮 GAS系统在多人游戏中的设置差异与初始化时机"></a>🎮 GAS系统在多人游戏中的设置差异与初始化时机</h1><h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>**多人游戏（Networked Game）**中，由于存在服务器与多个客户端的结构，GAS 的使用必须区分不同对象在运行时的职责和行为。</p>
+<hr>
+<h2 id="二、GAS核心对象与角色差异"><a href="#二、GAS核心对象与角色差异" class="headerlink" title="二、GAS核心对象与角色差异"></a>二、GAS核心对象与角色差异</h2><table>
+<thead>
+<tr>
+<th>对象名称</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Owner Actor</strong></td>
+<td>GAS组件的拥有者（通常为PlayerState，便于跨控制器持久化）。</td>
+</tr>
+<tr>
+<td><strong>Avatar Actor</strong></td>
+<td>能力的执行者（通常为Character或Pawn）。</td>
+</tr>
+<tr>
+<td><strong>Controller</strong></td>
+<td>控制角色的输入源（客户端中为PlayerController）。</td>
+</tr>
+<tr>
+<td><strong>Server（Authority）</strong></td>
+<td>权威角色，处理所有真实逻辑、能力应用、属性变化。</td>
+</tr>
+<tr>
+<td><strong>Client</strong></td>
+<td>接收结果并本地预测显示，仅可请求、不能决定游戏状态。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、各端差异汇总"><a href="#三、各端差异汇总" class="headerlink" title="三、各端差异汇总"></a>三、各端差异汇总</h2><h3 id="1-能力激活与同步"><a href="#1-能力激活与同步" class="headerlink" title="1. 能力激活与同步"></a>1. 能力激活与同步</h3><table>
+<thead>
+<tr>
+<th>操作内容</th>
+<th>服务器</th>
+<th>本地客户端</th>
+<th align="center">远程客户端</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>激活Ability</td>
+<td>权威执行</td>
+<td>预测激活</td>
+<td align="center">不能激活</td>
+</tr>
+<tr>
+<td>应用GameplayEffect</td>
+<td>执行并广播</td>
+<td>预测申请</td>
+<td align="center">被动接收</td>
+</tr>
+<tr>
+<td>属性变化（如HP）</td>
+<td>计算更新</td>
+<td>仅接受同步</td>
+<td align="center">被动同步</td>
+</tr>
+<tr>
+<td>动画等表现</td>
+<td>播放实际动画</td>
+<td>播放预测动画</td>
+<td align="center">接收并展示</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、初始化流程详解"><a href="#四、初始化流程详解" class="headerlink" title="四、初始化流程详解"></a>四、初始化流程详解</h2><h3 id="1-关键函数"><a href="#1-关键函数" class="headerlink" title="1. 关键函数"></a>1. 关键函数</h3><ul>
+<li><p><code>InitAbilityActorInfo(OwnerActor, AvatarActor)</code><br>初始化 GAS，使其知道“谁拥有”与“谁在表现能力”。</p>
+</li>
+<li><p><code>GiveAbility</code> / <code>ApplyGameplayEffectToSelf</code><br>授予技能与初始属性，仅应由服务器执行。</p>
+</li>
+<li><p><code>BindAbilityActivationToInputComponent</code><br>客户端绑定输入与Ability激活。</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-初始化顺序与执行位置"><a href="#2-初始化顺序与执行位置" class="headerlink" title="2. 初始化顺序与执行位置"></a>2. 初始化顺序与执行位置</h3><table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>函数</th>
+<th>执行端</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>构造 / BeginPlay</td>
+<td>所有</td>
+<td>创建AbilitySystemComponent指针</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>PossessedBy</code></td>
+<td>服务器</td>
+<td>初始化 GAS + 授予能力和属性</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>OnRep_PlayerState</code></td>
+<td>客户端</td>
+<td>重新初始化 GAS 以同步服务器信息</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>SetupPlayerInputComponent</code></td>
+<td>本地客户端</td>
+<td>绑定输入到Ability</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-推荐实现结构（Character类）"><a href="#3-推荐实现结构（Character类）" class="headerlink" title="3. 推荐实现结构（Character类）"></a>3. 推荐实现结构（Character类）</h3><pre><code class="language-cpp">// 服务器端：控制器接管后初始化 GAS
+void AMyCharacter::PossessedBy(AController* NewController)
+{
+    Super::PossessedBy(NewController);
+    AbilitySystemComponent-&gt;InitAbilityActorInfo(GetPlayerState(), this);
+    GrantDefaultAbilities(); // 授予能力和属性
+}
+
+// 客户端：同步PlayerState后初始化 GAS
+void AMyCharacter::OnRep_PlayerState()
+{
+    Super::OnRep_PlayerState();
+    AbilitySystemComponent-&gt;InitAbilityActorInfo(GetPlayerState(), this);
+}
+
+// 输入绑定（本地控制客户端）
+void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+    Super::SetupPlayerInputComponent(PlayerInputComponent);
+    if (IsLocallyControlled())
+    {
+        AbilitySystemComponent-&gt;BindAbilityActivationToInputComponent(
+            InputComponent,
+            FGameplayAbilityInputBinds("Confirm", "Cancel", "EAbilityInputID")
+        );
+    }
+}
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://euandy.github.io">Euandy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://euandy.github.io/2025/06/21/GAS%E5%9C%A8%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/">https://euandy.github.io/2025/06/21/GAS%E5%9C%A8%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://euandy.github.io" target="_blank">Euandy-Blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer=""></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/06/14/%E7%9A%84%E5%8C%BA%E5%88%AB/" title="的区别"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">的区别</div></div><div class="info-2"><div class="info-item-1">TObjectPtr、TSharedPtr、TWeakPtr、TSoftObjectPtr 的区别与使用场景在使用 Unreal Engine 5（UE5） 进行开发时，可能会遇到不同种类的智能指针类型：TObjectPtr、TSharedPtr、TWeakPtr、TSoftObjectPtr 等。它们虽然都具有管理对象生命周期或访问对象的作用，但底层机制与应用场景大不相同。  一、TObjectPtr —— 原生 UObject 指针封装（UE5引入）概念TObjectPtr&lt;T&gt; 是 UE5 中引入的新指针类型，用来替代原生的 T* 指针用于引用 UObject 子类实例的情况，目的是加强 GC系统的追踪能力 和 内存安全性。 特点 只能用于继承自 UObject 的类型； 自动参与 GC（垃圾回收）； 避免野指针，增强 GC 识别； 开销极小，运行时几乎等价于原始指针。  使用场景 类成员变量中引用 UObject 实例时； 替代裸 UObject* 指针，用于被 GC...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/avater.jpg'" alt="avatar"></div><div class="author-info-name">Euandy</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Euandy/Euandy.github.io" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%8E%AE-GAS%E7%B3%BB%E7%BB%9F%E5%9C%A8%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E8%AE%BE%E7%BD%AE%E5%B7%AE%E5%BC%82%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96%E6%97%B6%E6%9C%BA"><span class="toc-text">🎮 GAS系统在多人游戏中的设置差异与初始化时机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">一、概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81GAS%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1%E4%B8%8E%E8%A7%92%E8%89%B2%E5%B7%AE%E5%BC%82"><span class="toc-text">二、GAS核心对象与角色差异</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%90%84%E7%AB%AF%E5%B7%AE%E5%BC%82%E6%B1%87%E6%80%BB"><span class="toc-text">三、各端差异汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%83%BD%E5%8A%9B%E6%BF%80%E6%B4%BB%E4%B8%8E%E5%90%8C%E6%AD%A5"><span class="toc-text">1. 能力激活与同步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3"><span class="toc-text">四、初始化流程详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%B3%E9%94%AE%E5%87%BD%E6%95%B0"><span class="toc-text">1. 关键函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%E4%B8%8E%E6%89%A7%E8%A1%8C%E4%BD%8D%E7%BD%AE"><span class="toc-text">2. 初始化顺序与执行位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%8E%A8%E8%8D%90%E5%AE%9E%E7%8E%B0%E7%BB%93%E6%9E%84%EF%BC%88Character%E7%B1%BB%EF%BC%89"><span class="toc-text">3. 推荐实现结构（Character类）</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/21/GAS%E5%9C%A8%E5%A4%9A%E4%BA%BA%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" title="GAS在多人游戏中的使用">GAS在多人游戏中的使用</a><time datetime="2025-06-21T12:46:10.000Z" title="发表于 2025-06-21 20:46:10">2025-06-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/14/%E7%9A%84%E5%8C%BA%E5%88%AB/" title="的区别">的区别</a><time datetime="2025-06-14T15:24:51.000Z" title="发表于 2025-06-14 23:24:51">2025-06-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/11/%E5%9F%BA%E4%BA%8E%E3%80%8A%E6%9C%80%E7%BB%88%E5%B9%BB%E6%83%B3%E3%80%8B%E5%92%8C%E3%80%8A%E6%9A%97%E9%BB%91%E7%A0%B4%E5%9D%8F%E7%A5%9E%E3%80%8B%E7%9A%84RPG%E6%B8%B8%E6%88%8F%E7%AE%80%E5%8D%95%E5%88%86%E6%9E%90/" title="基于《最终幻想》和《暗黑破坏神》的RPG游戏简单分析">基于《最终幻想》和《暗黑破坏神》的RPG游戏简单分析</a><time datetime="2025-06-11T04:42:56.000Z" title="发表于 2025-06-11 12:42:56">2025-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/11/%E6%B8%B8%E6%88%8F%E6%8B%86%E8%A7%A3%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93/" title="游戏拆解简单总结">游戏拆解简单总结</a><time datetime="2025-06-11T04:38:01.000Z" title="发表于 2025-06-11 12:38:01">2025-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/10/%E7%AD%96%E5%88%92%E6%A1%88/" title="《超时空守护者》游戏策划案">《超时空守护者》游戏策划案</a><time datetime="2025-06-10T13:05:19.000Z" title="发表于 2025-06-10 21:05:19">2025-06-10</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent;"><div id="footer-wrap"><div class="copyright">©2025 By Euandy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zindex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      const usePjax = true
+      false 
+        ? (usePjax ? pjax.loadUrl('/404.html') : window.location.href = '/404.html')
+        : window.location.href = e.request.responseURL
+    }
+  })
+})()</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
